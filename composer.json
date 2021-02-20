@@ -1,0 +1,25 @@
+{
+    "name": "neutronstars/neutrino",
+    "description": "Kernel of Neutrino Framework developed by NeutronStars",
+    "type": "library",
+    "license": [ "Apache-2.0" ],
+    "authors": [
+        {
+            "name": "NeutronStars",
+            "email": "pro@neutronstars.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">= 7.4",
+        "neutronstars/router": "^1.0",
+        "eftec/bladeone": "^3.49",
+        "ext-json": "*",
+        "phpmailer/phpmailer": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "NeutronStars\\Neutrino\\": "src/"
+        }
+    }
+}
