@@ -2,6 +2,7 @@
 
 namespace NeutronStars\Neutrino\Core;
 
+use NeutronStars\Form\Form;
 use NeutronStars\Neutrino\Core\View\View;
 use NeutronStars\Neutrino\Core\View\ViewEngine;
 use NeutronStars\Neutrino\HTTP\ContentType;
@@ -72,5 +73,12 @@ abstract class Controller
     protected function createEmail(): Email
     {
         return new Email();
+    }
+
+    protected function createForm(
+        array $values = [], string $action = '',
+        string $method = 'POST', $secureXSRF = true
+    ): Form {
+        return new Form();
     }
 }

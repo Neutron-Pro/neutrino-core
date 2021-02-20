@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d7abb57f5656dc441b37e2af2037ad6",
+    "content-hash": "7d0a3ecf6efbafb3f98bfcc96b08b425",
     "packages": [
         {
             "name": "eftec/bladeone",
@@ -63,6 +63,46 @@
                 "source": "https://github.com/EFTEC/BladeOne/tree/3.49.1"
             },
             "time": "2021-01-14T12:14:45+00:00"
+        },
+        {
+            "name": "neutronstars/form",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Neutron-Pro/form.git",
+                "reference": "86abf18206d8f1c8a20f1cd9db098757e4070e67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Neutron-Pro/form/zipball/86abf18206d8f1c8a20f1cd9db098757e4070e67",
+                "reference": "86abf18206d8f1c8a20f1cd9db098757e4070e67",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NeutronStars\\Form\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "NeutronStars",
+                    "email": "pro@neutronstars.fr"
+                }
+            ],
+            "description": "Form and FormValidator library",
+            "support": {
+                "issues": "https://github.com/Neutron-Pro/form/issues",
+                "source": "https://github.com/Neutron-Pro/form/tree/1.0.0"
+            },
+            "time": "2021-02-20T21:07:42+00:00"
         },
         {
             "name": "neutronstars/router",
