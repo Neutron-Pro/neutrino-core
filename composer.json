@@ -1,5 +1,5 @@
 {
-    "name": "neutronstars/neutrino",
+    "name": "neutronstars/neutrino-core",
     "description": "Kernel of Neutrino Framework developed by NeutronStars",
     "type": "library",
     "license": [ "Apache-2.0" ],
