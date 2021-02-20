@@ -79,6 +79,6 @@ abstract class Controller
         array $values = [], string $action = '',
         string $method = 'POST', $secureXSRF = true
     ): Form {
-        return new Form();
+        return new Form($values, $action, $method, $secureXSRF);
     }
 }
