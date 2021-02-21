@@ -2,6 +2,7 @@
 
 namespace NeutronStars\Neutrino\Core;
 
+use NeutronStars\FlashSession\FlashMessage;
 use NeutronStars\Form\Form;
 use NeutronStars\Neutrino\Core\View\View;
 use NeutronStars\Neutrino\Core\View\ViewEngine;
@@ -80,5 +81,15 @@ abstract class Controller
         string $method = 'POST', $secureXSRF = true
     ): Form {
         return new Form($values, $action, $method, $secureXSRF);
+    }
+
+    protected function getFlash(string ...$keys): array
+    {
+        return Kernel::get()->getFlashSession()->flashes(...$keys);
+    }
+
+    protected function addFlash(string $type, string $message): void
+    {
+        Kernel::get()->getFlashSession()->add($type, new FlashMessage($type, $message));
     }
 }

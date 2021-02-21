@@ -3,6 +3,7 @@ namespace NeutronStars\Neutrino\Core;
 
 use eftec\bladeone\BladeOne;
 use NeutronStars\Database\Database;
+use NeutronStars\FlashSession\FlashSession;
 use NeutronStars\Neutrino\Core\View\BladeOneView;
 use NeutronStars\Neutrino\Exception\KernelException;
 use NeutronStars\Router\Router;
@@ -37,6 +38,7 @@ class Kernel
 
     private ?BladeOne $bladeOne = null;
     private ?Database $database = null;
+    private ?FlashSession $flashSession = null;
 
     private function __construct(Configuration $configuration, Router $router)
     {
@@ -87,6 +89,17 @@ class Kernel
         return $this->database;
     }
 
+    /**
+     * @return FlashSession
+     */
+    public function getFlashSession(): FlashSession
+    {
+        if ($this->flashSession === null) {
+            $this->flashSession = new FlashSession('_flashes_bag');
+        }
+        return $this->flashSession;
+    }
+
     public function registerRoutes(Configuration $routes): void
     {
         $routes->forEach(function ($key, $value) {
@@ -102,10 +115,15 @@ class Kernel
         $route = $this->router->find($params);
         if ($route != null) {
             $route->setSelected(true);
+
             $controller = $route->getController();
             $controller = new $controller();
             $reflection = new ReflectionMethod($controller, $route->getCallMethod());
             $reflection->invoke($controller, ...$params);
+
+            if ($this->flashSession !== null) {
+                $this->flashSession->saveMessages();
+            }
         }
     }
 }

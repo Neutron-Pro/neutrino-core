@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20ddd825cee0057732c61a7d34a50fb3",
+    "content-hash": "ea0cea82b2c2a098fac1415720c3f8c0",
     "packages": [
         {
             "name": "eftec/bladeone",
@@ -107,6 +107,46 @@
                 "source": "https://github.com/Neutron-Pro/neutronstars-database-sql/tree/1.0.6"
             },
             "time": "2021-02-21T11:12:17+00:00"
+        },
+        {
+            "name": "neutronstars/flash-session",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Neutron-Pro/flash-session.git",
+                "reference": "25f614576694cfd0804e7d5a764fc1229d4f1fcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Neutron-Pro/flash-session/zipball/25f614576694cfd0804e7d5a764fc1229d4f1fcb",
+                "reference": "25f614576694cfd0804e7d5a764fc1229d4f1fcb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NeutronStars\\FlashSession\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "NeutronStars",
+                    "email": "pro@neutronstars.fr"
+                }
+            ],
+            "description": "Message flash into the session",
+            "support": {
+                "issues": "https://github.com/Neutron-Pro/flash-session/issues",
+                "source": "https://github.com/Neutron-Pro/flash-session/tree/1.0.0"
+            },
+            "time": "2021-02-21T15:16:00+00:00"
         },
         {
             "name": "neutronstars/form",
