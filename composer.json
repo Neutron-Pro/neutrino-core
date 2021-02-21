@@ -16,7 +16,9 @@
         "eftec/bladeone": "^3.49",
         "ext-json": "*",
         "phpmailer/phpmailer": "^6.3",
-        "neutronstars/form": "^1.0"
+        "neutronstars/form": "^1.0",
+        "neutronstars/database-sql": "^1.0",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

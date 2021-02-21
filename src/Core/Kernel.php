@@ -2,9 +2,11 @@
 namespace NeutronStars\Neutrino\Core;
 
 use eftec\bladeone\BladeOne;
+use NeutronStars\Database\Database;
 use NeutronStars\Neutrino\Core\View\BladeOneView;
 use NeutronStars\Neutrino\Exception\KernelException;
 use NeutronStars\Router\Router;
+use PDO;
 use ReflectionException;
 use ReflectionMethod;
 
@@ -32,7 +34,9 @@ class Kernel
 
     private Configuration $configuration;
     private Router $router;
+
     private ?BladeOne $bladeOne = null;
+    private ?Database $database = null;
 
     private function __construct(Configuration $configuration, Router $router)
     {
@@ -59,6 +63,28 @@ class Kernel
             ], $this->configuration->get('bladeCache', '../var/cache'));
         }
         return $this->bladeOne;
+    }
+
+    /**
+     * @return Database
+     */
+    public function getDatabase(): Database
+    {
+        if ($this->database === null) {
+            $this->database = new Database(
+                $this->configuration->get('database.dbname'),
+                [
+                    'url' => $this->configuration->get('database.host', '127.0.0.1'),
+                    'port' => $this->configuration->get('database.port', 3306),
+                    'user' => $this->configuration->get('database.user', ''),
+                    'password' => $this->configuration->get('database.password', ''),
+                    'charset' => $this->configuration->get('database.charset', 'utf8mb4'),
+                    'fetchMode' => $this->configuration->get('database.mode.fetch', PDO::FETCH_OBJ),
+                    'errorMode' => $this->configuration->get('database.mode.error', PDO::ERRMODE_WARNING),
+                ]
+            );
+        }
+        return $this->database;
     }
 
     public function registerRoutes(Configuration $routes): void
