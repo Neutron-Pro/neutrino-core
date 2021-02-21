@@ -110,16 +110,16 @@
         },
         {
             "name": "neutronstars/flash-session",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Neutron-Pro/flash-session.git",
-                "reference": "25f614576694cfd0804e7d5a764fc1229d4f1fcb"
+                "reference": "d0ab15ee009a3aac4245febb5f946f2d2155c4ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Neutron-Pro/flash-session/zipball/25f614576694cfd0804e7d5a764fc1229d4f1fcb",
-                "reference": "25f614576694cfd0804e7d5a764fc1229d4f1fcb",
+                "url": "https://api.github.com/repos/Neutron-Pro/flash-session/zipball/d0ab15ee009a3aac4245febb5f946f2d2155c4ea",
+                "reference": "d0ab15ee009a3aac4245febb5f946f2d2155c4ea",
                 "shasum": ""
             },
             "require": {
@@ -144,9 +144,9 @@
             "description": "Message flash into the session",
             "support": {
                 "issues": "https://github.com/Neutron-Pro/flash-session/issues",
-                "source": "https://github.com/Neutron-Pro/flash-session/tree/1.0.0"
+                "source": "https://github.com/Neutron-Pro/flash-session/tree/1.0.1"
             },
-            "time": "2021-02-21T15:16:00+00:00"
+            "time": "2021-02-21T15:56:35+00:00"
         },
         {
             "name": "neutronstars/form",
