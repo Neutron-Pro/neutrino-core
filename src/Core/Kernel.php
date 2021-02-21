@@ -121,9 +121,18 @@ class Kernel
             $reflection = new ReflectionMethod($controller, $route->getCallMethod());
             $reflection->invoke($controller, ...$params);
 
-            if ($this->flashSession !== null) {
-                $this->flashSession->saveMessages();
-            }
+            $this->die();
         }
+    }
+
+    public function die($callback = null): void
+    {
+        if ($this->flashSession !== null) {
+            $this->flashSession->saveMessages();
+        }
+        if($callback !== null) {
+            $callback();
+        }
+        die;
     }
 }

@@ -60,15 +60,17 @@ abstract class Controller
 
     protected function page404(): void
     {
-        $this->setCode(HTTPCode::CODE_404);
-        $this->render('app.404');
-        die;
+        Kernel::get()->die(function () {
+            $this->setCode(HTTPCode::CODE_404);
+            $this->render('app.404');
+        });
     }
 
     protected function redirect(string $route, $params = []): void
     {
-        header('Location: ' . Kernel::get()->getRouter()->get($route, $params));
-        die;
+        Kernel::get()->die(function () use ($route, $params) {
+            header('Location: ' . Kernel::get()->getRouter()->get($route, $params));
+        });
     }
 
     protected function createEmail(): Email
