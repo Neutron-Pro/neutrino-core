@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dc8c5753c9d436c9287ea947bf63252",
+    "content-hash": "20ddd825cee0057732c61a7d34a50fb3",
     "packages": [
         {
             "name": "eftec/bladeone",
@@ -110,16 +110,16 @@
         },
         {
             "name": "neutronstars/form",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Neutron-Pro/form.git",
-                "reference": "86abf18206d8f1c8a20f1cd9db098757e4070e67"
+                "reference": "20793db8412d286a317067cd8c5f3642deb1d41d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Neutron-Pro/form/zipball/86abf18206d8f1c8a20f1cd9db098757e4070e67",
-                "reference": "86abf18206d8f1c8a20f1cd9db098757e4070e67",
+                "url": "https://api.github.com/repos/Neutron-Pro/form/zipball/20793db8412d286a317067cd8c5f3642deb1d41d",
+                "reference": "20793db8412d286a317067cd8c5f3642deb1d41d",
                 "shasum": ""
             },
             "require": {
@@ -144,9 +144,9 @@
             "description": "Form and FormValidator library",
             "support": {
                 "issues": "https://github.com/Neutron-Pro/form/issues",
-                "source": "https://github.com/Neutron-Pro/form/tree/1.0.0"
+                "source": "https://github.com/Neutron-Pro/form/tree/1.0.1"
             },
-            "time": "2021-02-20T21:07:42+00:00"
+            "time": "2021-02-21T12:04:05+00:00"
         },
         {
             "name": "neutronstars/router",
@@ -273,7 +273,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">= 7.4",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
