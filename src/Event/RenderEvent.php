@@ -26,7 +26,7 @@ class RenderEvent implements Event, Cancellable
 
     public function isCancelled(): bool
     {
-        return $this->render;
+        return $this->cancelled;
     }
 
     public function setCancelled(bool $cancelled): void

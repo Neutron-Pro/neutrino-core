@@ -137,6 +137,7 @@ class Kernel
         $listeners->forEach(function ($key, $value) {
             $this->events->registers(['name' => $key] + $value);
         });
+        $this->events->call('kernel.init', new KernelEvent($this));
         return $this;
     }
 
