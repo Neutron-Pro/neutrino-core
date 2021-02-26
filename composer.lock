@@ -110,16 +110,16 @@
         },
         {
             "name": "neutronstars/events",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Neutron-Pro/events.git",
-                "reference": "faa67d8420575ac7f495d2d530d2ae149d61cb2d"
+                "reference": "582a04fdb9dc7b7d36e90c0f4bf4fcc44fd5dd72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Neutron-Pro/events/zipball/faa67d8420575ac7f495d2d530d2ae149d61cb2d",
-                "reference": "faa67d8420575ac7f495d2d530d2ae149d61cb2d",
+                "url": "https://api.github.com/repos/Neutron-Pro/events/zipball/582a04fdb9dc7b7d36e90c0f4bf4fcc44fd5dd72",
+                "reference": "582a04fdb9dc7b7d36e90c0f4bf4fcc44fd5dd72",
                 "shasum": ""
             },
             "require": {
@@ -144,9 +144,9 @@
             "description": "Event Manager for PHP",
             "support": {
                 "issues": "https://github.com/Neutron-Pro/events/issues",
-                "source": "https://github.com/Neutron-Pro/events/tree/1.0.1"
+                "source": "https://github.com/Neutron-Pro/events/tree/1.0.2"
             },
-            "time": "2021-02-26T20:42:34+00:00"
+            "time": "2021-02-26T21:41:23+00:00"
         },
         {
             "name": "neutronstars/flash-session",

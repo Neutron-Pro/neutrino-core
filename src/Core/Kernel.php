@@ -120,7 +120,7 @@ class Kernel
         return $this->flashSession;
     }
 
-    public function registerRoutes(Configuration $routes): void
+    public function registerRoutes(Configuration $routes): self
     {
         $routes->forEach(function ($key, $value) {
             $event = new AddRouteEvent($key, $value);
@@ -129,6 +129,15 @@ class Kernel
                 $this->router->add($key, $value);
             }
         });
+        return $this;
+    }
+
+    public function registerListeners(Configuration $listeners): self
+    {
+        $listeners->forEach(function ($key, $value) {
+            $this->events->registers(['name' => $key] + $value);
+        });
+        return $this;
     }
 
     /**
