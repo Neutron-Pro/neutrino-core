@@ -3,8 +3,15 @@ namespace NeutronStars\Neutrino\Core;
 
 use eftec\bladeone\BladeOne;
 use NeutronStars\Database\Database;
+use NeutronStars\Events\Events;
 use NeutronStars\FlashSession\FlashSession;
 use NeutronStars\Neutrino\Core\View\BladeOneView;
+use NeutronStars\Neutrino\Event\AddRouteEvent;
+use NeutronStars\Neutrino\Event\BladeEvent;
+use NeutronStars\Neutrino\Event\CallRouteEvent;
+use NeutronStars\Neutrino\Event\DatabaseEvent;
+use NeutronStars\Neutrino\Event\FlashSessionEvent;
+use NeutronStars\Neutrino\Event\KernelEvent;
 use NeutronStars\Neutrino\Exception\KernelException;
 use NeutronStars\Router\Router;
 use PDO;
@@ -34,6 +41,7 @@ class Kernel
     }
 
     private Configuration $configuration;
+    private Events $events;
     private Router $router;
 
     private ?BladeOne $bladeOne = null;
@@ -43,6 +51,7 @@ class Kernel
     private function __construct(Configuration $configuration, Router $router)
     {
         $this->configuration = $configuration;
+        $this->events = new Events();
         $this->router = $router;
     }
 
@@ -56,13 +65,20 @@ class Kernel
         return $this->router;
     }
 
+    public function getEvents(): Events
+    {
+        return $this->events;
+    }
+
     public function getBlade(): BladeOne
     {
         if ($this->bladeOne === null) {
-            $this->bladeOne = new BladeOneView($this->router, [
+            $event = new BladeEvent(new BladeOneView($this->router, [
                 $this->configuration->get('views', '../templates/views'),
                 $this->configuration->get('layouts', '../templates/layouts')
-            ], $this->configuration->get('bladeCache', '../var/cache'));
+            ], $this->configuration->get('bladeCache', '../var/cache')));
+            $this->events->call('blade.init', $event);
+            $this->bladeOne = $event->getBladeOne();
         }
         return $this->bladeOne;
     }
@@ -73,7 +89,7 @@ class Kernel
     public function getDatabase(): Database
     {
         if ($this->database === null) {
-            $this->database = new Database(
+            $event = new DatabaseEvent(new Database(
                 $this->configuration->get('database.dbname'),
                 [
                     'url' => $this->configuration->get('database.host', '127.0.0.1'),
@@ -84,7 +100,9 @@ class Kernel
                     'fetchMode' => $this->configuration->get('database.mode.fetch', PDO::FETCH_OBJ),
                     'errorMode' => $this->configuration->get('database.mode.error', PDO::ERRMODE_WARNING),
                 ]
-            );
+            ));
+            $this->events->call('database.init', $event);
+            $this->database = $event->getDatabase();
         }
         return $this->database;
     }
@@ -95,7 +113,9 @@ class Kernel
     public function getFlashSession(): FlashSession
     {
         if ($this->flashSession === null) {
-            $this->flashSession = new FlashSession('_flashes_bag');
+            $event = new FlashSessionEvent(new FlashSession('_flashes_bag'));
+            $this->events->call('flash_session.init', $event);
+            $this->flashSession = $event->getFlashSession();
         }
         return $this->flashSession;
     }
@@ -103,7 +123,11 @@ class Kernel
     public function registerRoutes(Configuration $routes): void
     {
         $routes->forEach(function ($key, $value) {
-            $this->router->add($key, $value);
+            $event = new AddRouteEvent($key, $value);
+            $this->events->call('route.add', $event);
+            if (!$event->isCancelled()) {
+                $this->router->add($key, $value);
+            }
         });
     }
 
@@ -114,19 +138,24 @@ class Kernel
     {
         $route = $this->router->find($params);
         if ($route != null) {
-            $route->setSelected(true);
-
-            $controller = $route->getController();
-            $controller = new $controller();
-            $reflection = new ReflectionMethod($controller, $route->getCallMethod());
-            $reflection->invoke($controller, ...$params);
-
-            $this->die();
+            $event = new CallRouteEvent($route);
+            $this->events->call('route.call', $event);
+            if (!$event->isCancelled()) {
+                $route = $event->getRoute();
+                $route->setSelected(true);
+                $controller = $route->getController();
+                $controller = new $controller();
+                $reflection = new ReflectionMethod($controller, $route->getCallMethod());
+                $reflection->invoke($controller, ...$params);
+                $this->die();
+            }
         }
     }
 
     public function die($callback = null): void
     {
+        $this->events->call('kernel.die', new KernelEvent($this));
+
         if ($this->flashSession !== null) {
             $this->flashSession->saveMessages();
         }

@@ -4,6 +4,7 @@ namespace NeutronStars\Neutrino\Core\View;
 
 use NeutronStars\Neutrino\Core\Kernel;
 use Exception;
+use NeutronStars\Neutrino\Event\RenderEvent;
 
 class View
 {
@@ -25,13 +26,21 @@ class View
      */
     public function run(?string $layout = null): string
     {
+        $event = null;
         switch ($this->engine) {
             case ViewEngine::BLADE:
-                return $this->renderBlade();
+                $event = new RenderEvent($this->renderBlade());
+                break;
             case ViewEngine::DEFAULT:
-                return $this->renderDefault($layout);
+                $event = new RenderEvent($this->renderDefault($layout));
+                break;
         }
-        throw new Exception('Can\'t found the view engine !');
+        if ($event != null) {
+            Kernel::get()->getEvents()->call('view.render', $event);
+            if (!$event->isCancelled()) {
+                return $event->getRender();
+            }
+        }
     }
 
     /**

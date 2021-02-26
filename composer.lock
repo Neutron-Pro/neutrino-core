@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea0cea82b2c2a098fac1415720c3f8c0",
+    "content-hash": "f7fbe800ff47aa0e9158982acbd6e1be",
     "packages": [
         {
             "name": "eftec/bladeone",
-            "version": "3.49.1",
+            "version": "3.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EFTEC/BladeOne.git",
-                "reference": "b30021e41d0182e8bcce495484024643f18b9d2e"
+                "reference": "61e5d9b6fc6f565b525ac135e6b7e5161e1702c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EFTEC/BladeOne/zipball/b30021e41d0182e8bcce495484024643f18b9d2e",
-                "reference": "b30021e41d0182e8bcce495484024643f18b9d2e",
+                "url": "https://api.github.com/repos/EFTEC/BladeOne/zipball/61e5d9b6fc6f565b525ac135e6b7e5161e1702c8",
+                "reference": "61e5d9b6fc6f565b525ac135e6b7e5161e1702c8",
                 "shasum": ""
             },
             "require": {
@@ -60,9 +60,9 @@
             ],
             "support": {
                 "issues": "https://github.com/EFTEC/BladeOne/issues",
-                "source": "https://github.com/EFTEC/BladeOne/tree/3.49.1"
+                "source": "https://github.com/EFTEC/BladeOne/tree/3.51"
             },
-            "time": "2021-01-14T12:14:45+00:00"
+            "time": "2021-02-26T14:27:39+00:00"
         },
         {
             "name": "neutronstars/database-sql",
@@ -107,6 +107,46 @@
                 "source": "https://github.com/Neutron-Pro/neutronstars-database-sql/tree/1.0.6"
             },
             "time": "2021-02-21T11:12:17+00:00"
+        },
+        {
+            "name": "neutronstars/events",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Neutron-Pro/events.git",
+                "reference": "faa67d8420575ac7f495d2d530d2ae149d61cb2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Neutron-Pro/events/zipball/faa67d8420575ac7f495d2d530d2ae149d61cb2d",
+                "reference": "faa67d8420575ac7f495d2d530d2ae149d61cb2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NeutronStars\\Events\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "NeutronStars",
+                    "email": "pro@neutronstars.fr"
+                }
+            ],
+            "description": "Event Manager for PHP",
+            "support": {
+                "issues": "https://github.com/Neutron-Pro/events/issues",
+                "source": "https://github.com/Neutron-Pro/events/tree/1.0.1"
+            },
+            "time": "2021-02-26T20:42:34+00:00"
         },
         {
             "name": "neutronstars/flash-session",

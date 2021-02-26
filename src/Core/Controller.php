@@ -6,6 +6,8 @@ use NeutronStars\FlashSession\FlashMessage;
 use NeutronStars\Form\Form;
 use NeutronStars\Neutrino\Core\View\View;
 use NeutronStars\Neutrino\Core\View\ViewEngine;
+use NeutronStars\Neutrino\Event\AddFlashMessageEvent;
+use NeutronStars\Neutrino\Event\RenderEvent;
 use NeutronStars\Neutrino\HTTP\ContentType;
 use NeutronStars\Neutrino\HTTP\HTTPCode;
 
@@ -39,13 +41,22 @@ abstract class Controller
             $object = json_encode($object);
         }
         $this->setContentType(ContentType::APPLICATION_JSON);
-        echo $object;
+        $this->sendResponse($object);
     }
 
     protected function renderText($text): void
     {
         $this->setContentType(ContentType::TEXT_PLAIN);
-        echo $text;
+        $this->sendResponse($text);
+    }
+
+    protected function sendResponse(string $response)
+    {
+        $event = new RenderEvent($response);
+        Kernel::get()->getEvents()->call('view.render', $event);
+        if (!$event->isCancelled()) {
+            echo $event->getRender();
+        }
     }
 
     protected function setCode(string $code): void
@@ -92,6 +103,10 @@ abstract class Controller
 
     protected function addFlash(string $type, string $message): void
     {
-        Kernel::get()->getFlashSession()->add($type, new FlashMessage($type, $message));
+        $event = new AddFlashMessageEvent(new FlashMessage($type, $message));
+        Kernel::get()->getEvents()->call('flash_session.add', $event);
+        if (!$event->isCancelled()) {
+            Kernel::get()->getFlashSession()->add($type, new FlashMessage($type, $message));
+        }
     }
 }

@@ -3,6 +3,7 @@ namespace NeutronStars\Neutrino\Core;
 
 use Exception;
 use NeutronStars\Neutrino\Core\View\View;
+use NeutronStars\Neutrino\Event\SendEmailEvent;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Email
@@ -68,6 +69,10 @@ class Email
         } else {
             $this->mailer->Body    = $content;
         }
-        $this->mailer->send();
+        $event = new SendEmailEvent($this);
+        Kernel::get()->getEvents()->call('email.send', $event);
+        if (!$event->isCancelled()) {
+            $this->mailer->send();
+        }
     }
 }
